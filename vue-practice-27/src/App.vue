@@ -1,8 +1,9 @@
+<!-- src/App.vue -->
 <template>
     <div id="app">
         <header class="app-header">
             <h1>Vue 3 Практика - Основы</h1>
-            <p>Изучаем реактивность, директивы и компоненты</p>
+            <p>Изучаем реактивность, директивы, компоненты и роутинг</p>
         </header>
 
         <nav class="navigation">
@@ -28,6 +29,27 @@
                 Пример 3: События
             </button>
             <button
+                @click="currentDemo = 'usercards'"
+                :class="{ active: currentDemo === 'usercards' }"
+                class="nav-button"
+            >
+                Пример 4: Компоненты и пропсы
+            </button>
+            <button
+                @click="currentDemo = 'searchexample'"
+                :class="{ active: currentDemo === 'searchexample' }"
+                class="nav-button"
+            >
+                Пример 5: Поиск и кастомные элементы
+            </button>
+            <button
+                @click="currentDemo = 'router'"
+                :class="{ active: currentDemo === 'router' }"
+                class="nav-button"
+            >
+                Пример 6: Vue Router
+            </button>
+            <button
                 @click="currentDemo = 'colors'"
                 :class="{ active: currentDemo === 'colors' }"
                 class="nav-button"
@@ -40,8 +62,11 @@
             <ReactiveDemo v-if="currentDemo === 'reactive'" />
             <ConditionalListDemo v-else-if="currentDemo === 'conditional'" />
             <EventComputedDemo v-else-if="currentDemo === 'events'" />
+            <UserCards v-else-if="currentDemo === 'usercards'" />
+            <SearchExample v-else-if="currentDemo === 'searchexample'" />
+            <RouterView v-else-if="currentDemo === 'router'" />
             <ColorPaletteGenerator v-else-if="currentDemo === 'colors'" />
-
+            
             <div v-else class="welcome-message">
                 <h2>Добро пожаловать!</h2>
                 <p>Выберите пример для изучения из навигации выше.</p>
@@ -49,16 +74,19 @@
         </main>
 
         <footer class="app-footer">
-            <p>Vue 3 + Vite • Практика 27</p>
+            <p>Vue 3 + Vite • Практика 28</p>
         </footer>
     </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import { RouterView } from 'vue-router'
 import ReactiveDemo from './components/ReactiveDemo.vue'
 import ConditionalListDemo from './components/ConditionalListDemo.vue'
 import EventComputedDemo from './components/EventComputedDemo.vue'
+import UserCards from './components/UserCards.vue'
+import SearchExample from './components/SearchExample.vue'
 import ColorPaletteGenerator from './components/ColorPaletteGenerator.vue'
 
 export default {
@@ -67,7 +95,10 @@ export default {
         ReactiveDemo,
         ConditionalListDemo,
         EventComputedDemo,
-        ColorPaletteGenerator
+        UserCards,
+        SearchExample,
+        ColorPaletteGenerator,
+        RouterView
     },
     setup() {
         const currentDemo = ref('reactive')
